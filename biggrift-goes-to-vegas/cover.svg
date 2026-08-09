@@ -1,0 +1,42 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="82%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#e11d48" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#e11d48" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="chip" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#15120e"/>
+  <circle cx="980" cy="230" r="360" fill="url(#glow)"/>
+
+  <!-- poker chip stack, right side -->
+  <g transform="translate(940,360)">
+    <ellipse cx="0" cy="70" rx="130" ry="34" fill="#0d0b08" opacity="0.5"/>
+    <g>
+      <circle cx="0" cy="50" r="120" fill="url(#chip)" stroke="#78350f" stroke-width="6"/>
+      <circle cx="0" cy="50" r="120" fill="none" stroke="#fef3c7" stroke-width="2" stroke-dasharray="10 14" opacity="0.7"/>
+      <circle cx="0" cy="50" r="72" fill="none" stroke="#78350f" stroke-width="4"/>
+    </g>
+    <g>
+      <circle cx="0" cy="0" r="120" fill="#e11d48" stroke="#7f1d1d" stroke-width="6"/>
+      <circle cx="0" cy="0" r="120" fill="none" stroke="#fecdd3" stroke-width="2" stroke-dasharray="10 14" opacity="0.7"/>
+      <circle cx="0" cy="0" r="72" fill="none" stroke="#7f1d1d" stroke-width="4"/>
+      <text x="0" y="14" font-family="'Courier New', monospace" font-size="34" font-weight="700" fill="#fff1f2" text-anchor="middle">$360</text>
+    </g>
+  </g>
+
+  <!-- circuit hint bottom left -->
+  <g stroke="#e11d48" stroke-width="1.5" opacity="0.3" fill="none">
+    <path d="M 60 560 L 60 520 L 140 520 L 140 480"/>
+    <circle cx="140" cy="480" r="3" fill="#e11d48"/>
+  </g>
+
+  <text x="80" y="130" font-family="'Courier New', monospace" font-size="18" fill="#facc15" letter-spacing="3" font-weight="700">BOOK ONE OF THE BIGGRIFT SERIES</text>
+  <text x="78" y="230" font-family="Georgia, 'Times New Roman', serif" font-size="64" fill="#f8f3e7" font-weight="700">BigGrift</text>
+  <text x="78" y="295" font-family="Georgia, 'Times New Roman', serif" font-size="46" fill="#f8f3e7" font-weight="700">Goes to Vegas</text>
+  <text x="80" y="350" font-family="'Courier New', monospace" font-size="17" fill="#e11d48" font-weight="700" letter-spacing="2">3 PATHS · 9 ENDINGS · ONE $360 BADGE</text>
+  <text x="80" y="560" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#8a7f66">Malcolm R. Smith · A DEFCON Heist Comedy</text>
+</svg>
