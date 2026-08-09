@@ -1,0 +1,30 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="80%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0805"/>
+  <circle cx="960" cy="200" r="380" fill="url(#glow)"/>
+
+  <!-- ledger / block chain motif -->
+  <g stroke="#f59e0b" stroke-width="1.5" opacity="0.5" fill="none">
+    <rect x="860" y="320" width="70" height="70" rx="6"/>
+    <rect x="960" y="320" width="70" height="70" rx="6"/>
+    <rect x="1060" y="320" width="70" height="70" rx="6"/>
+    <line x1="930" y1="355" x2="960" y2="355"/>
+    <line x1="1030" y1="355" x2="1060" y2="355"/>
+  </g>
+  <g fill="#fbbf24" opacity="0.8">
+    <circle cx="895" cy="355" r="3"/>
+    <circle cx="995" cy="355" r="3"/>
+    <circle cx="1095" cy="355" r="3"/>
+  </g>
+
+  <text x="80" y="140" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#fbbf24" letter-spacing="3" font-weight="600">A SAVVY SECURITY NARRATIVE</text>
+  <text x="78" y="220" font-family="Georgia, 'Times New Roman', serif" font-size="50" fill="#f8fafc" font-weight="700">The Sovereign Code</text>
+  <text x="80" y="280" font-family="Georgia, 'Times New Roman', serif" font-size="25" fill="#e5c98d" font-style="italic">Hyper-Scarce Bitcoin, Smart Contracts, and the Next Global Reserve</text>
+  <text x="80" y="340" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#94a3b8">Rapscallion Sevangee navigates a $40T systemic crisis toward a people's reserve.</text>
+  <text x="80" y="560" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#64748b">Malcolm R. Smith · Interactive HTML Edition</text>
+</svg>

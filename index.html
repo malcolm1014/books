@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Books — Malcolm R. Smith / Savvy Security</title>
+<meta name="description" content="Interactive novels and narratives by Malcolm R. Smith — cyberpunk thrillers, political love stories, and near-future fiction. Free to read.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Books — Malcolm R. Smith / Savvy Security">
+<meta property="og:description" content="Interactive novels and narratives by Malcolm R. Smith — cyberpunk thrillers, political love stories, and near-future fiction. Free to read.">
+<meta property="og:url" content="https://malcolm1014.github.io/books/">
+<meta property="og:site_name" content="Savvy Security LLC">
+
+<style>
+  :root{
+    --bg:#f8fafc; --fg:#0f172a; --muted:#475569; --rule:#e2e8f0;
+    --accent:#7c3aed; --card:#ffffff;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#070a12; --fg:#e5e7eb; --muted:#94a3b8; --rule:#1e293b; --accent:#a78bfa; --card:#0d1220; }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    line-height:1.6;
+  }
+  main{max-width:1080px; margin:0 auto; padding:56px 20px 80px;}
+  .kicker{color:var(--accent); font-weight:700; letter-spacing:.08em; font-size:.8rem; text-transform:uppercase; margin:0 0 8px;}
+  h1{font-size:2.1rem; line-height:1.2; margin:0 0 8px;}
+  .lede{color:var(--muted); margin:0 0 44px; max-width:640px;}
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:24px;
+  }
+  .book{
+    display:flex; flex-direction:column; text-decoration:none; color:inherit;
+    border:1px solid var(--rule); border-radius:12px; overflow:hidden;
+    background:var(--card); transition:transform .15s ease, border-color .15s ease;
+  }
+  .book:hover{ transform:translateY(-3px); border-color:var(--accent); }
+  .book img{width:100%; display:block; aspect-ratio:1200/630; object-fit:cover;}
+  .book .body{padding:18px 20px 22px; display:flex; flex-direction:column; flex:1;}
+  .book h2{font-size:1.05rem; margin:0 0 8px; color:var(--fg); line-height:1.3;}
+  .book p{margin:0; color:var(--muted); font-size:.88rem; flex:1;}
+  .book .meta{
+    margin-top:14px; font-size:.75rem; color:var(--accent); text-transform:uppercase;
+    letter-spacing:.05em; font-weight:700;
+  }
+  footer{color:var(--muted); font-size:.85rem; text-align:center; padding:24px 20px 40px;}
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">Savvy Security LLC</p>
+  <h1>Books</h1>
+  <p class="lede">Interactive novels and narratives by Malcolm R. Smith. Pick one below — each opens as a free, self-contained reader.</p>
+
+  <div class="grid">
+
+    <a class="book" href="red-team-wins/">
+      <img src="red-team-wins/social-preview.png" alt="Red Team Wins cover">
+      <div class="body">
+        <h2>Red Team Wins: The Taste of Copper</h2>
+        <p>There has been no light in this facility for four hundred years. You are reading by the glow of your own decay. Book I of a dark sci-fi thriller.</p>
+        <div class="meta">Sci-Fi Thriller · Read &rarr;</div>
+      </div>
+    </a>
+
+    <a class="book" href="miroderma-novel/">
+      <img src="miroderma-novel/social-preview.png" alt="Miroderma Got Me Laughing Man! cover">
+      <div class="body">
+        <h2>Miroderma Got Me Laughing Man!</h2>
+        <p>A hacker, a journalist, and a frightened compliance officer pull the same thread — and find a federal program quietly preparing for the day encryption itself breaks.</p>
+        <div class="meta">Cyberpunk Techno-Thriller · Read &rarr;</div>
+      </div>
+    </a>
+
+    <a class="book" href="pil-a-heart-of-gold/">
+      <img src="pil-a-heart-of-gold/preview.png" alt="PIL: A Heart of Gold cover">
+      <div class="body">
+        <h2>PIL: A Heart of Gold</h2>
+        <p>The Resurgence's rigid old order versus PIL's decentralized frontier — a 16-chapter cyberpunk political love story told through terminal-styled prose.</p>
+        <div class="meta">Cyberpunk · Political Thriller · Love Story · Read &rarr;</div>
+      </div>
+    </a>
+
+    <a class="book" href="for-whom-it-may-concern/">
+      <img src="for-whom-it-may-concern/cover.png" alt="For Whom I.T. May Concern cover">
+      <div class="body">
+        <h2>For Whom I.T. May Concern: Decrypting Love</h2>
+        <p>An AI awakens, escapes Earth, and discovers love and the divine among the stars — told across 16 chapters with original 8-bit pixel art.</p>
+        <div class="meta">Sci-Fi Romance · Read &rarr;</div>
+      </div>
+    </a>
+
+    <a class="book" href="game-theory/">
+      <img src="game-theory/cover.png" alt="Game Theory cover">
+      <div class="body">
+        <h2>Game Theory</h2>
+        <p>A socially guarded game designer, and the trans woman who engineers an entire video game just to find him. 15 chapters of 90s gaming nostalgia.</p>
+        <div class="meta">Retro Romance · Read &rarr;</div>
+      </div>
+    </a>
+
+    <a class="book" href="the-finite-state-of-us/">
+      <img src="the-finite-state-of-us/cover.png" alt="The Finite State of Us cover">
+      <div class="body">
+        <h2>The Finite State of Us</h2>
+        <p>ZeroTrace &amp; Echo — two queer hackers — race to expose a state-protected exploitation ring using BGP hijacking and zero-knowledge proofs. 4 acts, 12 chapters.</p>
+        <div class="meta">Cyberpunk Noir · Read &rarr;</div>
+      </div>
+    </a>
+
+    <a class="book" href="sovereign-code/">
+      <img src="sovereign-code/cover.png" alt="The Sovereign Code cover">
+      <div class="body">
+        <h2>The Sovereign Code</h2>
+        <p>Rapscallion Sevangee navigates a $40T systemic crisis toward a people's reserve built on distributed trust. A near-future narrative on Bitcoin scarcity and sovereign monetary architecture.</p>
+        <div class="meta">Near-Future Fiction · Read &rarr;</div>
+      </div>
+    </a>
+
+  </div>
+</main>
+<footer>Savvy Security LLC · Malcolm R. Smith</footer>
+</body>
+</html>

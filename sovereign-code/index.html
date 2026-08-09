@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sovereign Code — Malcolm Smith</title>
+<meta name="description" content="The Sovereign Code: Hyper-Scarce Bitcoin, Smart Contracts, and the Next Global Reserve, by Malcolm Smith.">
+<meta property="og:type" content="book">
+<meta property="og:title" content="The Sovereign Code — Hyper-Scarce Bitcoin, Smart Contracts, and the Next Global Reserve">
+<meta property="og:description" content="Rapscallion Sevangee navigates a $40T systemic crisis toward a people's reserve built on distributed trust. An interactive HTML edition.">
+<meta property="og:image" content="https://malcolm1014.github.io/books/sovereign-code/cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://malcolm1014.github.io/books/sovereign-code/">
+<meta property="og:site_name" content="Savvy Security LLC">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://malcolm1014.github.io/books/sovereign-code/cover.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #050505;
+      color: #00FF41;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      line-height: 1.88;
+    }
+    body::after {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.045) 3px, rgba(0,0,0,0.045) 4px);
+      pointer-events: none; z-index: 9999;
+    }
+    #scroll-progress {
+      position: fixed; top: 0; left: 0;
+      height: 2px; background: #F7931A;
+      z-index: 10000; width: 0%;
+      transition: width 0.12s linear;
+      box-shadow: 0 0 8px rgba(247,147,26,0.5);
+    }
+    #toc-btn {
+      position: fixed; top: 18px; right: 18px;
+      z-index: 999;
+      background: rgba(5,5,5,0.94);
+      border: 1px solid rgba(247,147,26,0.28);
+      color: #F7931A;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.2em;
+      padding: 10px 16px; cursor: pointer;
+      text-transform: uppercase;
+      transition: border-color 0.2s;
+    }
+    #toc-btn:hover { border-color: #F7931A; }
+    #toc-panel {
+      position: fixed; top: 0; right: 0;
+      width: min(340px, 92vw); height: 100vh;
+      background: #090909;
+      border-left: 1px solid rgba(247,147,26,0.12);
+      z-index: 1000; padding: 54px 28px 28px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.32s ease;
+    }
+    #toc-panel.open { transform: translateX(0); }
+    #toc-close {
+      position: absolute; top: 16px; right: 18px;
+      background: none; border: none;
+      color: #3a4a32; font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; cursor: pointer;
+      letter-spacing: 0.1em;
+    }
+    #toc-close:hover { color: #F7931A; }
+    .toc-book-title { font-size: 10px; letter-spacing: 0.35em; color: #F7931A; margin-bottom: 24px; text-transform: uppercase; font-weight: 700; }
+    .toc-act-label { font-size: 9px; letter-spacing: 0.32em; color: rgba(247,147,26,0.35); margin: 20px 0 5px; text-transform: uppercase; }
+    .toc-link {
+      display: flex; align-items: baseline; gap: 10px;
+      padding: 7px 0; text-decoration: none;
+      font-size: 11px; color: #4a5a42;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: color 0.2s; letter-spacing: 0.04em;
+    }
+    .toc-link:hover { color: #F7931A; }
+    .toc-num { color: rgba(247,147,26,0.45); min-width: 28px; }
+    #cover {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      border-bottom: 1px solid rgba(247,147,26,0.08);
+    }
+    #cover-canvas {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; opacity: 0.13;
+      pointer-events: none;
+    }
+    .cover-inner {
+      position: relative; z-index: 1;
+      text-align: center; padding: 60px 40px;
+    }
+    .cover-eyebrow {
+      font-size: 10px; letter-spacing: 0.45em;
+      color: #00FF41; margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards;
+    }
+    .cover-title {
+      font-size: clamp(44px, 9vw, 96px);
+      font-weight: 800; line-height: 1.0;
+      color: #f0ebe0; letter-spacing: -0.02em;
+      opacity: 0; animation: titleReveal 1.4s 0.7s ease forwards;
+    }
+    .cover-orange { color: #F7931A; }
+    .cover-subtitle {
+      font-size: clamp(11px, 1.8vw, 15px);
+      color: #4a5a42; max-width: 540px;
+      margin: 22px auto 0; letter-spacing: 0.04em; line-height: 1.65;
+      opacity: 0; animation: fadeUp 0.8s 1.4s ease forwards;
+    }
+    .cover-rule {
+      width: 56px; height: 1px;
+      background: rgba(247,147,26,0.35);
+      margin: 36px auto;
+      opacity: 0; animation: fadeUp 0.8s 1.7s ease forwards;
+    }
+    .cover-author {
+      font-size: 12px; letter-spacing: 0.18em; color: #7a8a72;
+      opacity: 0; animation: fadeUp 0.8s 1.9s ease forwards;
+    }
+    .cover-pub {
+      font-size: 10px; letter-spacing: 0.16em; color: #2a3a22;
+      margin-top: 6px;
+      opacity: 0; animation: fadeUp 0.8s 2.1s ease forwards;
+    }
+    .cover-scroll {
+      position: absolute; bottom: 38px;
+      font-size: 9px; letter-spacing: 0.4em; color: #2a3a22;
+      text-transform: uppercase;
+      opacity: 0; animation: fadeUp 0.8s 2.6s ease forwards;
+    }
+    .blink { animation: blink 1.3s infinite; }
+    .chapter-opener {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      background: #060607;
+      border-bottom: 1px solid rgba(247,147,26,0.07);
+    }
+    .ch-bg-num {
+      position: absolute;
+      font-size: clamp(180px, 28vw, 380px);
+      font-weight: 800; color: #F7931A;
+      opacity: 0.028; line-height: 1;
+      user-select: none; letter-spacing: -0.05em;
+    }
+    .ch-inner { position: relative; z-index: 1; text-align: center; padding: 40px; }
+    .ch-label {
+      font-size: 9px; letter-spacing: 0.45em;
+      color: #F7931A; text-transform: uppercase;
+      margin-bottom: 14px; opacity: 0.65;
+    }
+    .ch-title { font-size: clamp(26px, 5.5vw, 58px); font-weight: 700; color: #f0ebe0; max-width: 700px; line-height: 1.12; animation: glitch 11s infinite; }
+    .ch-sub { margin-top: 22px; font-size: 11px; color: #2a3a22; letter-spacing: 0.08em; }
+    .act-divider {
+      padding: 96px 40px; text-align: center;
+      background: #070708;
+      border-top: 1px solid rgba(247,147,26,0.1);
+      border-bottom: 1px solid rgba(247,147,26,0.1);
+    }
+    .act-eye { font-size: 9px; letter-spacing: 0.5em; color: #00FF41; margin-bottom: 14px; text-transform: uppercase; }
+    .act-ttl { font-size: clamp(18px, 3.5vw, 34px); font-weight: 700; color: #F7931A; letter-spacing: 0.04em; }
+    .act-rule { width: 70px; height: 1px; background: rgba(247,147,26,0.25); margin: 22px auto 0; }
+    .content-wrap { max-width: 720px; margin: 0 auto; padding: 80px 40px; }
+    .content-wrap p { margin-bottom: 22px; }
+    .sec-title {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.22em;
+      color: #F7931A; text-transform: uppercase;
+      margin: 52px 0 18px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid rgba(247,147,26,0.18);
+    }
+    .divr { text-align: center; color: rgba(247,147,26,0.18); margin: 48px 0; letter-spacing: 0.5em; font-size: 11px; }
+    .code-block {
+      background: #0d1117;
+      border: 1px solid rgba(0,255,65,0.18);
+      border-left: 3px solid #00FF41;
+      padding: 0 0 20px;
+      margin: 32px 0; overflow-x: auto;
+    }
+    .code-header {
+      display: flex; align-items: center; gap: 7px;
+      padding: 12px 20px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 14px;
+    }
+    .cd { width: 9px; height: 9px; border-radius: 50%; }
+    .clang { font-size: 9px; letter-spacing: 0.22em; color: #00FF41; text-transform: uppercase; margin-left: auto; }
+    .code-pre {
+      color: #e2ddd4; font-size: 12.5px; line-height: 1.65;
+      white-space: pre; padding: 0 20px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .kw { color: #ff7b72; }
+    .fn { color: #d2a8ff; }
+    .str { color: #a5d6ff; }
+    .cm { color: #6a7a62; font-style: italic; }
+    .nm { color: #f2cc60; }
+    .tp { color: #ffa657; }
+    .terminal-block {
+      background: #080808;
+      border: 1px solid rgba(0,255,65,0.13);
+      padding: 18px 22px; margin: 32px 0;
+      font-size: 12.5px; color: #00FF41; line-height: 1.72;
+    }
+    .t-label { font-size: 9px; letter-spacing: 0.3em; color: rgba(0,255,65,0.4); margin-bottom: 10px; text-transform: uppercase; }
+    .alert-block {
+      background: #0d0900;
+      border: 1px solid rgba(247,147,26,0.28);
+      border-left: 3px solid #F7931A;
+      padding: 18px 22px; margin: 32px 0;
+      font-size: 12.5px; color: #F7931A; line-height: 1.72;
+    }
+    .a-label { font-size: 9px; letter-spacing: 0.3em; color: rgba(255,60,60,0.7); margin-bottom: 10px; text-transform: uppercase; }
+    .a-price { font-size: 22px; font-weight: 700; color: #F7931A; margin-bottom: 12px; }
+    .chat-log {
+      background: #080808;
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 20px 22px; margin: 32px 0; line-height: 1.95;
+    }
+    .c-label { font-size: 9px; letter-spacing: 0.28em; color: #2a3a22; margin-bottom: 12px; text-transform: uppercase; }
+    .c-ts { color: #1e2e18; font-size: 12px; }
+    .c-a { color: #F7931A; font-size: 12px; }
+    .c-b { color: #00FF41; font-size: 12px; }
+    .c-c { color: #a78bfa; font-size: 12px; }
+    .c-msg { color: #7a8a72; font-size: 12.5px; }
+    .ascii-diag {
+      background: #080808;
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 22px 18px; margin: 32px 0;
+      font-size: 12px; color: #00FF41;
+      white-space: pre; overflow-x: auto; line-height: 1.48;
+    }
+    .phase-list { margin: 24px 0; }
+    .phase-item {
+      border-left: 2px solid rgba(247,147,26,0.28);
+      padding: 14px 0 14px 20px; margin-bottom: 14px;
+    }
+    .phase-name { color: #F7931A; font-size: 11.5px; letter-spacing: 0.04em; margin-bottom: 7px; font-weight: 600; }
+    .phase-desc { color: #7a8a72; font-size: 13px; }
+    .fi { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fi.visible { opacity: 1; transform: translateY(0); }
+    .book-footer {
+      padding: 60px 40px; text-align: center;
+      border-top: 1px solid rgba(247,147,26,0.07);
+      color: #1e2e18; font-size: 10px; letter-spacing: 0.2em; line-height: 2.2;
+    }
+    @keyframes titleReveal {
+      from { opacity: 0; letter-spacing: 0.12em; }
+      to { opacity: 1; letter-spacing: -0.02em; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+    @keyframes glitch {
+      0%,82%,100% { text-shadow: none; transform: translate(0); }
+      84% { text-shadow: -2px 0 #00FF41, 2px 0 #F7931A; transform: translate(-1px,0); }
+      86% { text-shadow: 2px 0 #00FF41; transform: translate(2px,0); }
+      88% { text-shadow: -1px 0 #F7931A; transform: translate(0); }
+      90% { text-shadow: 1px 0 #00FF41, -1px 0 #F7931A; transform: translate(1px,0); }
+      92% { text-shadow: none; transform: translate(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+
+<button id="toc-btn" type="button">☰ CONTENTS</button>
+
+<div id="toc-panel">
+  <button id="toc-close" type="button">✕ CLOSE</button>
+  <div class="toc-book-title">The Sovereign Code</div>
+  <a href="#introduction" class="toc-link"><span class="toc-num">00</span>Introduction</a>
+  <div class="toc-act-label">Act I — The Shadow of the Purist</div>
+  <a href="#ch1" class="toc-link"><span class="toc-num">01</span>The $40 Trillion Precipice</a>
+  <a href="#ch2" class="toc-link"><span class="toc-num">02</span>The Compound of Isolation</a>
+  <a href="#ch3" class="toc-link"><span class="toc-num">03</span>Low-Level Cryptography</a>
+  <a href="#ch4" class="toc-link"><span class="toc-num">04</span>The Strategic Modernization Act</a>
+  <div class="toc-act-label">Act II — The Networked Brotherhood</div>
+  <a href="#ch5" class="toc-link"><span class="toc-num">05</span>The Iron Ledger</a>
+  <a href="#ch6" class="toc-link"><span class="toc-num">06</span>The Crucible of Volatility</a>
+  <a href="#ch7" class="toc-link"><span class="toc-num">07</span>The Data Oracle Pipeline</a>
+  <a href="#ch8" class="toc-link"><span class="toc-num">08</span>The Philosophy of Manhood</a>
+  <div class="toc-act-label">Act III — The People's Charter</div>
+  <a href="#ch9" class="toc-link"><span class="toc-num">09</span>The $2 Million Flashpoint</a>
+  <a href="#ch10" class="toc-link"><span class="toc-num">10</span>The Sovereign Buy-In Execution</a>
+  <a href="#ch11" class="toc-link"><span class="toc-num">11</span>The People's Bank vs. The New Nobles</a>
+  <a href="#ch12" class="toc-link"><span class="toc-num">12</span>The Algorithmic Renaissance</a>
+  <a href="#epilogue" class="toc-link"><span class="toc-num">EP</span>Epilogue: The Sovereign Epoch</a>
+</div>
+
+<!-- COVER -->
+<section id="cover">
+  <canvas id="cover-canvas"></canvas>
+  <div class="cover-inner">
+    <div class="cover-eyebrow">₿ SAVVY SECURITY LLC &nbsp;·&nbsp; 2026</div>
+    <div class="cover-title">THE <span class="cover-orange">SOVEREIGN</span><br>CODE</div>
+    <div class="cover-subtitle">Hyper-Scarce Bitcoin, Smart Contracts,<br>and the Next Global Reserve</div>
+    <div class="cover-rule"></div>
+    <div class="cover-author">WRITTEN BY MALCOLM SMITH</div>
+    <div class="cover-pub">© 2026 Malcolm Smith &nbsp;·&nbsp; All Rights Reserved</div>
+  </div>
+  <div class="cover-scroll"><span class="blink">▼</span>&nbsp; SCROLL TO BEGIN</div>
+</section>
+
+<!-- INTRODUCTION -->
+<section id="introduction">
+  <div class="chapter-opener" style="min-height:65vh">
+    <div class="ch-bg-num" style="font-size:clamp(100px,20vw,260px)">00</div>
+    <div class="ch-inner">
+      <div class="ch-label">INTRODUCTION</div>
+      <div class="ch-title" style="font-size:clamp(22px,4vw,42px)">Before the Narrative</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">Before the narrative chronicles the trajectory of Rapscallion Sevangee, the structural mechanics of the proposed macroeconomic paradigm must be validated. This architecture is not speculative fiction; it is a synthesis of three domains: distributed consensus systems, Austrian monetary dynamics, and free-market price transmission.</p>
+    <p class="fi">The systemic failure of the current fiat epoch, characterized by the debasement of currency to fund geopolitical agendas, mirrors the fragility described in Hayek's <em>The Road to Serfdom</em> (1944). By integrating the rigorous mathematical proofs of Byzantine Fault Tolerance (BFT)—as pioneered by Castro and Liskov (1999) and earlier by Lamport, Shostak, and Pease (1982)—with the sound money principles of Mises' <em>The Theory of Money and Credit</em> (1912), we propose a state-managed escrow architecture that renders executive expropriation computationally impossible.</p>
+    <div class="sec-title fi">1.1 &nbsp;Byzantine Fault Tolerance in Sovereign Vault Architecture</div>
+    <p class="fi">The vulnerability of centralized treasuries arises from single-point-of-failure logic. To remediate this, the proposed infrastructure operates across a consensus network of 3f+1 nodes. Unlike traditional Byzantine implementations, this variant—the "Sovereign Byzantine Protocol"—specifically weights nodes to represent the diverse interests of the polity: The Treasury (N_Treasury), The Judiciary (N_Judiciary), Private Cryptographic Estates (N_Estates), and Public Auditing (N_Auditing).</p>
+    <p class="fi">As established by Lamport et al., a consensus system remains robust as long as at most f nodes are malicious, provided the total nodes N ≥ 3f + 1. In our deployment, this guarantees that even a capture of the Treasury by an authoritarian regime cannot induce a state change without the cryptographic collusion of the Judicial and Private nodes, thereby creating a decentralized check and balance system rooted in the immutable laws of computer science rather than the fallible interpretations of political actors.</p>
+    <div class="sec-title fi">1.2 &nbsp;Austrian Monetary Dynamics</div>
+    <p class="fi">Mises' <em>Regression Theorem</em> is our operational baseline. Bitcoin, while often criticized for lacking "intrinsic" value, satisfies the theorem by regressing its utility back to the cost of Proof-of-Work—the conversion of electrical energy into unforgeable data. By anchoring the sovereign reserve to this hyper-scarce base, we operationalize Hayek's vision of the <em>Denationalization of Money</em>. This is not merely a technical upgrade; it is an ideological pivot from discretionary state control to structural algorithmic realism.</p>
+  </div>
+</section>
+
+<!-- ACT I -->
+<div class="act-divider">
+  <div class="act-eye">Act I</div>
+  <div class="act-ttl">THE SHADOW OF THE PURIST</div>
+  <div class="act-rule"></div>
+</div>
+
+<!-- ACT I GRAPHIC -->
+<div style="background:#060607;border-top:1px solid rgba(247,147,26,0.06);border-bottom:1px solid rgba(247,147,26,0.06);overflow:hidden">
+  <canvas id="act1-canvas" style="width:100%;display:block;height:240px"></canvas>
+</div>
+
+<!-- CHAPTER 1 -->
+<section id="ch1">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">01</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter One</div>
+      <div class="ch-title">The $40 Trillion Precipice</div>
+      <div class="ch-sub">October 24, 2026 — New York Federal Reserve</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">The atmosphere in the New York Federal Reserve was heavy, the air conditioned to a sterile, unnerving chill. It was October 24, 2026. The hum of the server racks was the only constant, a mechanical heartbeat measuring the final moments of a century-old order. On the primary displays, the M2 Money Supply charts—normally the focus of quiet, academic study—now resembled the jagged, vertical drop-offs of a mountain face. The U.S. national debt had breached $42.3 trillion. The interest on that debt, calculated at terminal rates, consumed 104% of total tax revenue. The Ponzi scheme was no longer theoretical; it was structurally terminal.</p>
+    <p class="fi">The Treasury Secretary, a man whose career had been spent in the halls of institutional power, watched the monitors. The overnight reverse repo facility, the lifeblood of the global financial system, had drained. It wasn't a sudden shock but a slow, agonizing exhaustion of liquidity. The "risk-free" benchmark, the 10-year Treasury bond, was now radioactive. International central banks were divesting with a speed that defied diplomatic decorum.</p>
+    <p class="fi">"We are beyond the point of standard recession," the Director of Open Market Operations said, his voice stripped of the bureaucratic obfuscation that usually defined his speech. "The velocity of money is approaching a singularity. If we inject liquidity, the market front-runs us and drives the dollar further into the dirt. If we don't, the bond market ceases to exist."</p>
+    <p class="fi">He gestured to the Bitcoin matrix on his side screen. The price was $1,942,000. It wasn't just a number; it was an eviction notice for the state. The Treasury Secretary realized then that he wasn't looking at a market trend; he was looking at a historical shift of power from political mandates to mathematical certainty.</p>
+    <p class="fi">"Activate the ARMA contingency," he whispered. It was the sound of a man resigning to his own obsolescence.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 2 -->
+<section id="ch2">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">02</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Two</div>
+      <div class="ch-title">The Compound of Isolation</div>
+      <div class="ch-sub">Idaho Panhandle — Three thousand miles away</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">Three thousand miles away, in the Idaho panhandle, the silence was a physical weight. Rapscallion Sevangee was twenty-six, and his world had been defined by the concrete walls of the Sevangee compound and the intense, suffocating dogma of his brother, Malakai.</p>
+    <p class="fi">Malakai paced the iron catwalk, his combat boots ringing out against the metal. He was a man composed of grievances and steel. Having lost their father to the machinery of the state—a man who had stood against the asset seizures of the 2010s—Malakai had raised Rapscallion to view the outside world not just as an adversary, but as a contagion.</p>
+    <p class="fi">"They're burning, Rap," Malakai growled, looking down at his younger brother. "Can you feel it in the code? The fiat beast is finally exhaling its last breath."</p>
+    <p class="fi">Rapscallion stared at his monitors, his fingers flying across the keys. His eyes were tired, the pallor of his skin reflecting the cold blue light of the screens. He didn't share Malakai's hatred; he felt only the clinical detachment of a researcher. To him, the code was the only objective reality he had ever known.</p>
+    <p class="fi">"They aren't dying, Malakai," Rapscallion said, his voice quiet, careful not to trigger one of his brother's volatile outbursts. "They're pivoting. Fort Meade is spinning up clusters. They're going to try to build a bridge."</p>
+    <p class="fi">Malakai stomped down from the catwalk, his physical presence dominating the small room. He leaned in, his face inches from Rapscallion's. "Bridges are for cowards. Bridges are how they bring the cage to us. If I see you connecting to them, I'll destroy this setup. You are my brother, and you belong to this mission, not to their network."</p>
+    <p class="fi">Rapscallion said nothing. He knew the cost of rebellion. He returned to the code, but inside the encrypted partition of his mind, he was already designing the architecture that would defy his brother's prison.</p>
+    <p class="fi">"If the system burns completely to the ground, Malakai, people starve," Rapscallion said, his voice barely above a whisper. "The code doesn't eat. It doesn't keep people warm. If we don't build a bridge between the decentralized ledger and the real world, then the ledger doesn't save anyone. It just records our descent into the dark."</p>
+    <p class="fi">Malakai slammed his hand down on the desk, the impact cracking the plastic casing of the terminal display. He leaned in until his sour breath fanned Rapscallion's face, his eyes fixed in a terrifying, unblinking stare. "We don't build bridges to tyrants, Rap! You're mine until the world ends! If I see a single packet of data bleed toward a federal IP, I'll melt these drives and bury you in this concrete tomb. Do you hear the silence? That's the only law we follow!"</p>
+    <p class="fi">Rapscallion looked back at the screen, his fingers returning to the home row. He didn't answer. He didn't need to. Deep within the encrypted memory partitions of his local system, an invitation had arrived that his brother could never be allowed to see.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 3 -->
+<section id="ch3">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">03</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Three</div>
+      <div class="ch-title">Low-Level Cryptography</div>
+      <div class="ch-sub">Inside the mind of Sovereign_Null</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">Rapscallion's work under the alias Sovereign_Null was his true life. While Malakai saw Bitcoin as a weapon for vengeance, Rapscallion saw it as an exercise in structural philosophy. He understood the BFT consensus model not just as a set of rules, but as a moral system—one that required zero trust in the participants.</p>
+    <p class="fi">He was currently auditing the validation.cpp file, a task he treated with the reverence a monk might reserve for a sacred text. He was obsessed with the efficiency of the script execution loops, shaving microseconds off verification times. He understood what others missed: the UTXO model was the antidote to the centralization of the state. It was an objective property right that existed outside of legislation.</p>
+    <div class="code-block fi">
+      <div class="code-header">
+        <div class="cd" style="background:#ff5f57"></div>
+        <div class="cd" style="background:#ffbd2e"></div>
+        <div class="cd" style="background:#28c840"></div>
+        <span class="clang">C++</span>
+      </div>
+      <div class="code-pre"><span class="cm">// Sovereign_Null Optimization Patch: Script Verification Speedup</span>
+<span class="kw">inline</span> <span class="kw">bool</span> <span class="fn">VerifyWitnessSignature</span>(<span class="kw">const</span> <span class="tp">CScriptWitness</span>&amp; witness,
+    <span class="kw">const</span> <span class="tp">uint256</span>&amp; hash, <span class="kw">const</span> <span class="tp">CScript</span>&amp; scriptPubKey) {
+    <span class="cm">// Implement highly optimized Secp256k1 verification loop</span>
+    <span class="kw">if</span> (witness.stack.<span class="fn">size</span>() &lt; <span class="nm">2</span>) <span class="kw">return</span> <span class="kw">false</span>;
+    <span class="tp">valtype</span> vchSig    = witness.stack[<span class="nm">0</span>];
+    <span class="tp">valtype</span> vchPubKey = witness.stack[<span class="nm">1</span>];
+
+    <span class="cm">// Bypass redundant memory allocations within inner loop</span>
+    <span class="kw">return</span> <span class="fn">secp256k1_context_verify_optimized</span>(
+        vchSig.<span class="fn">data</span>(), vchSig.<span class="fn">size</span>(),
+        vchPubKey.<span class="fn">data</span>(), vchPubKey.<span class="fn">size</span>(),
+        hash.<span class="fn">begin</span>());
+}</div>
+    </div>
+    <p class="fi">However, as he tracked the node metrics, the reality of the state's adaptation became clear. Industrial-scale miners, backed by sovereign wealth funds, were consolidating hash power. They were treating the decentralized protocol as a resource to be colonized. Rapscallion felt a cold shiver. The cypherpunks had thought they were fighting a war of attrition; they were actually fighting an adaptation war. If the network didn't evolve, it would be subsumed.</p>
+    <p class="fi">Through this deep immersion, Rapscallion understood something that both the politicians in New York and the radicals in his compound failed to grasp: the absolute integrity of the Unspent Transaction Output (UTXO) model. In a standard fiat system, money is an abstract account balance that can be altered, frozen, or diluted at the whim of an institutional database administrator. In the UTXO model, an asset is not a balance; it is a discrete piece of cryptographic matter that can only be unlocked by the presentation of a specific, unforgeable digital signature matching an elliptic curve public key. It was this absolute predictability that made the asset so dangerous to the legacy state—and so incredibly valuable.</p>
+    <p class="fi">The data confirmed his worst fears. The independent, home-based mining pools that had defined the early era of the network were being systematically priced out by massive, industrial-scale mining operations backed by sovereign wealth funds. The protocol was remaining decentralized in its consensus rules, but its underlying physical infrastructure was being rapidly consolidated by the very states his brother claimed were helpless.</p>
+    <p class="fi">Rapscallion stared at the incoming block data stream. The legacy monetary system was dying, but the state wasn't running away. It was adapting, learning the language of the code, and preparing to build an industrial-scale cage around the decentralized ecosystem. If the cypherpunks didn't innovate past mere passive resistance, they would find themselves living as outlaws inside a world completely governed by automated algorithmic laws.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 4 -->
+<section id="ch4">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">04</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Four</div>
+      <div class="ch-title">The Strategic Modernization Act</div>
+      <div class="ch-sub">Arlington, Virginia — Joint Fiscal Contingency Task Force</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">Dr. Elizabeth Vance stood before the Joint Fiscal Contingency Task Force in Arlington, her silhouette sharp against the glowing diagrams of the ARMA framework. "We are not here to destroy the dollar," she explained, her tone clinical. "We are here to save it by making it honest. The market has rejected our inflationary model. We must pivot to an algorithmic hybrid."</p>
+    <p class="fi">"We need the whales," she said, her voice dropping. "If they hide, the system has no velocity. We need to incentivize them to bring their wealth into the state vault, voluntarily. We need to convince them that the state is no longer their enemy, but their partner in stability."</p>
+    <p class="fi">It was a lie, of course—or at least a half-truth. They needed the whales to capture the network, to turn the decentralized ledger into a sovereign fiefdom. And deep within the system, somewhere in the mountains of Idaho, Rapscallion was listening, preparing to answer the call.</p>
+    <div class="phase-list fi">
+      <div class="phase-item">
+        <div class="phase-name">Phase I — The Liquidity Threshold Trigger</div>
+        <div class="phase-desc">The system remains dormant until the open market valuation of Bitcoin reaches $2,000,000 USD—a metric indicating that the liquid, floating supply of the asset has entered a state of terminal institutional exhaustion.</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-name">Phase II — The Sovereign Open Buy-In Program</div>
+        <div class="phase-desc">Upon activation, the Treasury opens a direct, automated interface allowing private whale holders to deposit their BTC into a state-managed, multi-signature escrow vault. In return, depositors receive <em>Sovereign Peerage Charters</em>, granting exclusive legal authority to establish private, localized banking entities backed directly by the sovereign credit of the United States.</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-name">Phase III — The Multi-Oracle Collateralization Matrix</div>
+        <div class="phase-desc">The minted currency supply is strictly governed by an automated smart contract basket utilizing a Practical Byzantine Fault Tolerant consensus model. The base money supply cannot be expanded by executive order; any expansion requires a verified, real-time increase in the underlying collateral matrix—time-locked Bitcoin core, physical precious metals reserves, and live production inputs from the Global Trade Index (GTI).</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-name">Phase IV — Algorithmic Settlement &amp; Clearings</div>
+        <div class="phase-desc">The newly generated currency settles instantly across automated smart contracts, bypassing the slow, corrupt clearinghouse networks of the legacy banking sector and enforcing an absolute, mathematical anti-inflationary discipline on the entire domestic economy.</div>
+      </div>
+    </div>
+    <p class="fi">"The primary bottleneck isn't the software," Dr. Vance concluded, her voice sharp with clinical precision. "It's the liquidity. To make this system viable to global markets, we need to secure a minimum core reserve of 1,000,000 Bitcoin within the state escrow vaults. If the whales refuse to deposit their assets—if they stay hidden in their private, off-grid networks—the system will fail for lack of collateral velocity, and the nation will descend into an uncontrolled hyperinflationary collapse."</p>
+  </div>
+</section>
+
+<!-- ACT II -->
+<div class="act-divider">
+  <div class="act-eye">Act II</div>
+  <div class="act-ttl">THE NETWORKED BROTHERHOOD<br>&amp; THE MARKET GAUNTLET</div>
+  <div class="act-rule"></div>
+</div>
+
+<!-- ACT II GRAPHIC -->
+<div style="background:#060607;border-top:1px solid rgba(0,255,65,0.06);border-bottom:1px solid rgba(0,255,65,0.06);overflow:hidden">
+  <canvas id="act2-canvas" style="width:100%;display:block;height:240px"></canvas>
+</div>
+
+<!-- CHAPTER 5 -->
+<section id="ch5">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">05</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Five</div>
+      <div class="ch-title">The Iron Ledger</div>
+      <div class="ch-sub">Breaking the signal — The encrypted commons</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">The hardware routing vector was brilliant in its technical simplicity. To bypass Malakai's localized panoptic security stack—which intercepted standard Tor, I2P, and commercial VPN handshakes at the WAN boundary—Rapscallion utilized an air-gapped, software-defined radio (SDR) transceiver tuned to a low-frequency, high-frequency (HF) skywave propagation band. By bouncing encrypted packets directly off the earth's ionosphere, he established an end-to-end encrypted packet-radio connection to a remote uplink node located four hundred miles away in an unmonitored maritime zone off the Pacific coast.</p>
+    <p class="fi">As the packets traversed the stratosphere, Rapscallion felt the first stirrings of a cognitive shift. For years, he had been a node in a vacuum, a system with f=0. In Byzantine Fault Tolerance theory, as established by Lamport, Shostak, and Pease (1982), a single isolated node has no mechanism for validating truth outside its own internal state; it is inherently fragile because it lacks the 3f+1 redundancy required to reach consensus. Malakai's bunker was that single, failing node—a silo of paranoid data.</p>
+    <p class="fi">Rapscallion realized that his transition to the network was not a surrender of his privacy, but an upgrade to his structural resilience. He was moving from a state of vulnerable isolation to a Sovereign Byzantine architecture where his own 'node' of consciousness could finally be weighted against the diverse interests of a broader, distributed polity.</p>
+    <p class="fi">The terminus of this clandestine pipeline was The Iron Ledger—an invite-only cryptographic chatroom hidden within a decentralized, append-only database network. The interface was completely devoid of modern visual clutter: an unyielding terminal screen displaying monospace text that populated lines chronologically, signed and timestamped via cryptographic public-key infrastructure.</p>
+    <div class="chat-log fi">
+      <div class="c-label">// THE IRON LEDGER — ENCRYPTED SESSION LOG</div>
+      <div><span class="c-ts">[2026-11-02 23:14:02 UTC]</span> <span class="c-a">&lt;Vanguard_Prime&gt;</span><span class="c-msg">: The M2 velocity metric is officially broken. The old repo desks are dead. Real sovereignty requires coordination, not isolation.</span></div>
+      <div><span class="c-ts">[2026-11-02 23:14:45 UTC]</span> <span class="c-b">&lt;Sovereign_Null&gt;</span><span class="c-msg">: Coordination requires trust. Trust requires an unalterable base layer. My local audits show enterprise-grade nodes spinning up on military IP allocations.</span></div>
+      <div><span class="c-ts">[2026-11-02 23:15:12 UTC]</span> <span class="c-c">&lt;Apex_Oracle&gt;</span><span class="c-msg">: The state is building pipelines because their well is dry, Null. The question is who controls the flow.</span></div>
+    </div>
+    <p class="fi">The user behind the pseudonym &lt;Vanguard_Prime&gt; was a former sovereign bond trader who had abandoned Wall Street during the early inflationary shocks of 2024. He quickly recognized the raw technical mastery in Rapscallion's base-layer commits, but he also diagnosed the young programmer's profound psychological isolation.</p>
+    <p class="fi">"Your brother Malakai wants to be a ghost in the machine, Rapscallion," Vanguard typed during a private, end-to-end encrypted session. "But a ghost cannot feed a community. A ghost cannot secure a baseline of liberties for a population when the fiat structure collapses. True manhood isn't about running away into the woods with a rifle and waiting for the world to burn. True manhood is about stepping into the center of the arena, mastering the tools of capital allocation, and forcing the new system to bend to the public trust."</p>
+    <p class="fi">This network of brothers provided Rapscallion with the precise structural boundaries his domestic life completely lacked. Where Malakai reacted with emotional outbursts and ideological condemnation, the men of The Iron Ledger demanded empirical proof and flawless execution. They held Rapscallion accountable for his logic, dismantling his ingrained insecurities by treating his technical opinions with rigorous, peer-reviewed respect. For the first time in his existence, he wasn't a child hiding from his brother's shadow; he was an equal peer in an elite, global vanguard engineering the future of human commerce.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 6 -->
+<section id="ch6">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">06</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Six</div>
+      <div class="ch-title">The Crucible of Volatility</div>
+      <div class="ch-sub">December 2026 — Global markets in freefall</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">By December 2026, the global digital asset markets had transformed into an absolute battlefield. The legacy financial sector was undergoing a violent, involuntary liquidation cascade—a terminal manifestation of the "cluster of errors" described by Ludwig von Mises. The fiat system, built on the artificial suppression of interest rates, had induced a decade of malinvestment; now, as the debt-ceiling fractured, the Austrian business cycle was reaching its correction point with tectonic force.</p>
+    <p class="fi">Rapscallion watched the carnage through the lens of order-book microstructure. As commercial banks scrambled to patch their balance-sheet holes, they dumped their liquid assets onto open markets, triggering unprecedented, algorithmic volatility. He noted the "liquidity holes"—vast gaps between bid and ask prices where the market depth had simply evaporated. The 'risk-free' rate was a fiction, and the high-frequency trading algorithms were cannibalizing one another in a desperate search for exit liquidity.</p>
+    <p class="fi">Rapscallion sat at his terminal, his eyes bloodshot, tracking the order-book depth across seven localized liquidity pools simultaneously. Using a custom Linux sandbox environment running on openSUSE with Crostini optimization, he had deployed a proprietary suite of Python-based automated trading scripts.</p>
+    <div class="code-block fi">
+      <div class="code-header">
+        <div class="cd" style="background:#ff5f57"></div>
+        <div class="cd" style="background:#ffbd2e"></div>
+        <div class="cd" style="background:#28c840"></div>
+        <span class="clang">Python</span>
+      </div>
+      <div class="code-pre"><span class="cm"># Savvy Security LLC - Market Liquidity Arbitrage Core</span>
+<span class="kw">import</span> hmac, hashlib, time, requests
+<span class="kw">from</span> decimal <span class="kw">import</span> <span class="tp">Decimal</span>
+
+<span class="kw">def</span> <span class="fn">execute_cross_arbitrage</span>(ex_a_price, ex_b_price, available_liquidity):
+    spread    = <span class="tp">Decimal</span>(ex_b_price) - <span class="tp">Decimal</span>(ex_a_price)
+    threshold = <span class="tp">Decimal</span>(<span class="str">'2500.00'</span>)  <span class="cm"># Minimum volatility spread required</span>
+
+    <span class="kw">if</span> spread &gt; threshold:
+        order_size = <span class="fn">min</span>(available_liquidity, <span class="tp">Decimal</span>(<span class="str">'50.00'</span>))
+        <span class="cm"># Initialize instantaneous, atomic cross-exchange execution matrix</span>
+        <span class="fn">trigger_atomic_buy</span>(exchange_A, order_size)
+        <span class="fn">trigger_atomic_sell</span>(exchange_B, order_size)
+        <span class="fn">print</span>(<span class="str">f"[ARBITRAGE METRIC] Executed atomic spread hedge: {spread} USD"</span>)</div>
+    </div>
+    <p class="fi">The market gauntlet was brutal. During a coordinated short-squeeze on December 14, an institutional desk attempted to hunt liquidity by dumping 12,000 synthetic BTC derivatives onto the market in four minutes, crashing the localized spot price by 18%. Inside the compound, the main breakers tripped as the local grid fluctuated. Malakai stormed into the room, screaming that the network was a scam and demanding that Rapscallion disconnect the hardware wallets.</p>
+    <p class="fi">"Get out!" Rapscallion roared, his voice cutting through the mechanical hum of the server racks with an authority that stunned his older brother into silence. He manually flipped the auxiliary backup battery array, restored his packet-radio terminal link, and watched his automated stop-loss mitigations hold the line. The algorithm absorbed the cheap spot liquidity, and within three hours, the market reversed violently as sovereign entities rushed to buy the dip. The price recovered, bursting through previous resistance levels to settle at $1,985,000.</p>
+    <p class="fi">Through this relentless market warfare, Rapscallion endured the mockery of both his brother and the online "purist" purveyors who labeled his systematic accumulation strategy as a betrayal of decentralization. He sat in his chair for forty-eight hours straight, managing risk, calculating slippage, and harvesting spreads. When the dust finally settled, Rapscallion's private keys controlled an immense, highly concentrated treasury of over 5,000 Bitcoin. He had successfully transitioned from a passive coder into a "whale"—a market-moving entity with enough liquid leverage to dictate terms to institutional structures.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 7 -->
+<section id="ch7">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">07</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Seven</div>
+      <div class="ch-title">The Data Oracle Pipeline</div>
+      <div class="ch-sub">Southern Ohio — A partnership of code and consequence</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">The technical bridge between Rapscallion's abstract digital wealth and the physical world arrived via an open-source development repository titled The Global Trade Index (GTI). Intrigued by the elegance of its data-validation models, Rapscallion initiated an encrypted code-review session with the repository's primary architect: a brilliant systems engineer named Aria Vance.</p>
+    <p class="fi">Aria worked out of a secure, independent industrial laboratory in southern Ohio. Unlike the programmatic purists who believed that code could exist in isolation from physical reality, Aria's life work was dedicated to tokenizing the actual physical flow of human productivity. Her creation, the GTI, was a highly advanced, decentralized oracle network that pulled real-time data directly from the physical infrastructure of global commerce. Her oracles weren't subjective web-scraping utilities; they were hardware-level telemetry units secured by cryptographic enclaves embedded into deep-water cargo port cranes, transcontinental grain elevators, main-line rail switches, and industrial precious metals smelting facilities.</p>
+    <div class="ascii-diag fi">                   [ PHYSICAL MATERIAL WORLD ]
+  ┌─────────────────────┬──────────────────────┬────────────────────┐
+  ▼                     ▼                      ▼                    ▼
+[ Port Cranes ]   [ Grain Silos ]      [ Oil Pipelines ]   [ Gold Smelters ]
+  │                     │                      │                    │
+  └─────────────────────┼──────────────────────┴────────────────────┘
+                        ▼
+          [ HARDWARE SECURE ENCLAVES ]
+          • SHA-256 Data Signature Cores
+          • Sealed Cryptographic Key Vaults
+                        │
+                        ▼
+          [ DECENTRALIZED ORACLE NETWORK ]
+          • Byzantine Fault Tolerant Consensus
+          • High-Fidelity Data Payload Assembly
+                        │
+                        ▼
+          [ GLOBAL TRADE INDEX (GTI) FEED ]</div>
+    <p class="fi">Their partnership became a technical symphony. Rapscallion provided the cryptographic proofs, while Aria provided the hardware enclaves. She explained the criticality of "Oracle Integrity": even the most perfect smart contract fails if the data feeding it is malicious. By utilizing sealed hardware enclaves, Aria ensured that data injection attacks were computationally impossible at the source.</p>
+    <p class="fi">"The primary flaw of the legacy financial system isn't just that they print the money, Rapscallion," Aria explained. "It's that their pricing mechanism is completely decoupled from physical reality. The Federal Reserve prints dollars based on political narratives and lagging bureaucratic metrics like the CPI. My system replaces politics with physics."</p>
+    <p class="fi">They were building a truth-based money system where the CPI wasn't a survey filled out by government employees, but a real-time telemetry feed of grain silos and port cranes that could not be coerced or edited by executive order.</p>
+    <p class="fi">As their technical collaboration deepened, an intense, intellectual romance blossomed between the two engineers. Aria's presence provided Rapscallion with a vital psychological anchor. When he confessed his lingering fears—admitting that Malakai's warnings of a total totalitarian digital surveillance cage haunted him—Aria refused to let him succumb to passive paranoia.</p>
+    <p class="fi">"The architecture of a smart contract is inherently neutral, Rap," she argued, her voice projecting a firm, pragmatic clarity that cut through his decades of isolation. "It is nothing but an empty pipeline. If you and the rest of the whales from The Iron Ledger stay hidden in your bunkers, the old Wall Street banking families will step into the vacuum. They will buy up the government's First-Tier Peerage Charters and configure the smart contracts to perpetuate their own monopoly. If you want the American people to be free, you have to stop hiding from the state. You have to invade the system with your capital, claim the charters, and build a bank that serves the public trust."</p>
+  </div>
+</section>
+
+<!-- CHAPTER 8 -->
+<section id="ch8">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">08</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Eight</div>
+      <div class="ch-title">The Philosophy of Manhood</div>
+      <div class="ch-sub">Early 2027 — The breaking point arrives</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">By early 2027, the internal conflict within Rapscallion reached its absolute breaking point. The physical environment of the compound had become toxic. Malakai, sensing that his brother was slipping away from his ideological control, grew increasingly volatile. He intercepted a physical hardware shipment containing industrial-grade cryptographic signing keys that Aria had mailed to Rapscallion, smashing the silicon chips with a hammer in front of his younger brother.</p>
+    <p class="fi">"You're losing your mind, Rap!" Malakai shouted, his face inches from Rapscallion's. "You're talking to girls on the network, you're tracking government white papers, and you're planning to hand our cryptographic leverage over to the Treasury. Our father died in a federal cell because he refused to bow to their financial laws! Have you forgotten what they did to our family?"</p>
+    <p class="fi">Rapscallion stood up, looking down at his older brother for the first time in his life. The physical disparity between them no longer mattered; the internal discipline he had forged in the market fires and the intellectual strength he had drawn from Aria and his digital brothers had finally coalesced into an unshakeable sense of self.</p>
+    <p class="fi">"Father didn't die for a system of sound money, Malakai," Rapscallion said, his voice completely calm, devoid of the fear that had defined his youth. "Father died because he was caught in a trap he didn't understand. You want to stay in this hole and nurse a grievance until the food runs out and the generators fail. You think you're a sovereign, but you're just a prisoner of the 'knowledge problem' Hayek described in 1945. No single man, no matter how many monitors he has, can possess the dispersed knowledge of a collapsing civilization. You cannot manage the complexity of survival from a bunker. True sovereignty isn't isolation; it is the ability to plug into the global, distributed consensus of the network. The network knows what you cannot: where the resources are, where the truth is, and where the future is moving. You're a node that has lost its sync with the blockchain of reality, Malakai. That isn't strength. That isn't manhood. That's just a slow suicide."</p>
+    <p class="fi">He turned back to his terminal, typing out his final confirmation message to Vanguard and Aria. His relationship with Aria had shown him a vision of a future worth fighting for—a household built on mutual respect, intellectual exploration, and actual civic utility. True maturity meant recognizing that he could not fill the paternal void in his life by remaining an eternal child under his brother's angry protection. He had to become his own father. He had to take total responsibility for his wealth, his talent, and his nation.</p>
+    <p class="fi">He closed his IDE, initiated a complete diagnostic wipe of his localized non-critical scrap logs, and began preparing his hardware wallets for a physical transit to the center of the economic storm.</p>
+  </div>
+</section>
+
+<!-- ACT III -->
+<div class="act-divider">
+  <div class="act-eye">Act III</div>
+  <div class="act-ttl">THE PEOPLE'S CHARTER</div>
+  <div class="act-rule"></div>
+</div>
+
+<!-- ACT III GRAPHIC -->
+<div style="background:#060607;border-top:1px solid rgba(247,147,26,0.06);border-bottom:1px solid rgba(247,147,26,0.06);overflow:hidden">
+  <canvas id="act3-canvas" style="width:100%;display:block;height:240px"></canvas>
+</div>
+
+<!-- CHAPTER 9 -->
+<section id="ch9">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">09</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Nine</div>
+      <div class="ch-title">The $2 Million Flashpoint</div>
+      <div class="ch-sub">March 14, 2027 — 04:12:09 UTC</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">The mathematical inevitability of the protocol executed on March 14, 2027, at precisely 04:12:09 UTC. Inside the global digital asset markets, a cascading supply shock of unprecedented magnitude collided with a total cessation of sell-side liquidity. On the major spot exchanges, the floating supply of Bitcoin—the residual liquid volume available for public market matching—effectively flatlined to zero.</p>
+    <p class="fi">A sovereign wealth fund seeking to hedge its collapsing fiat reserves attempted to execute an un-filled market buy order for 4,000 BTC. With no liquid sell orders sitting on the books, the matching engine's order matching loop skipped vertically across hundreds of thousands of empty price tiers, clearing out the final fractional retail sell walls in milliseconds.</p>
+    <div class="alert-block fi">
+      <div class="a-label">⚠ MARKET PROTOCOL SYSTEM ALERT</div>
+      <div class="a-price">$2,000,000.00 USD / 1 BTC</div>
+      &gt;&gt; LIQUID FLOATING SUPPLY EXHAUSTION RECORDED<br>
+      &gt;&gt; SPOT PRICE MATCH: $2,000,000.00 USD / 1 BTC<br>
+      &gt;&gt; MATCHING ENGINE STATUS: HALTED — ABSOLUTE SCARCITY MEASURED
+    </div>
+    <p class="fi">The threshold had been breached. The velocity of the legacy money supply (M2) instantly dropped into a terminal non-linear decay function. Commercial banking networks across the United States went into an involuntary lockstep suspension; domestic ATM networks ceased cash distribution, and electronic clearinghouse systems failed to clear credit balances as institutions realized that their unbacked paper representations were completely unhedged against a hyper-scarce cryptographic base.</p>
+    <p class="fi">In Washington, D.C., the President signed the emergency executive activation order for the American Reserve Modernization Act (ARMA). The Treasury's automated network interfaces initialized, transmitting a cryptographically signed broadcast across all global communication vectors. The state-managed Sovereign Open Buy-In Program was live. The government's enterprise server clusters at Fort Meade began listening for incoming transaction inputs, ready to grant the historic First-Tier Peerage Banking Charters to any whale holding the cryptographic liquidity required to back the new national reserve engine.</p>
+    <p class="fi">The race for absolute structural survival had begun, and the window for voluntary coordination was closing by the hour.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 10 -->
+<section id="ch10">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">10</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Ten</div>
+      <div class="ch-title">The Sovereign Buy-In Execution</div>
+      <div class="ch-sub">The compound — A final confrontation</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">The physical air inside the compound bunker was thick with the scent of ozone and burning copper wiring. Malakai stood in front of the primary exit terminal, his knuckles white around the grip of his rifle, his face twisted into an expression of raw, unmitigated betrayal. Behind him, the main terminal display array was flashing with an amber alert signal: Rapscallion's private keys were staged, verified, and queued for an external multi-sig transaction broadcast.</p>
+    <p class="fi">"You don't take a single step out of this room, Rap," Malakai growled, his voice dropping into a dangerous, erratic register. "You're handing them the keys to the kingdom. If you sign that transaction, you're validating the very machine that destroyed our family. I'll blow these server stacks to absolute hell before I let you surrender our leverage to the Treasury."</p>
+    <p class="fi">Rapscallion stood three feet from his brother, his posture completely straight, his hands holding a single, ruggedized hardware wallet interface. He looked directly into Malakai's eyes, not with the fear of the boy who had grown up in the shadows, but with the clear, unshakeable focus of a man who had mastered his own path.</p>
+    <p class="fi">"I'm not surrendering anything, Malakai," Rapscallion said, his voice matching the steady, immutable cadence of the blockchain ledger. "If I stay here, the old banking elites buy the charters, write the smart contracts, and build a digital feudalism that lasts a hundred years. I'm not running from the system anymore. I'm going to build the foundation that stops them. Move out of the way."</p>
+    <p class="fi">Malakai raised the rifle, his finger tightening against the trigger guard. For three seconds, the universe hung in a state of absolute equilibrium. Rapscallion didn't flinch. He didn't raise his hands. He simply stepped forward, his body entering the physical space of his brother's weapon. The psychological spell of the compound shattered. Under the weight of Rapscallion's unyielding determination, Malakai's gaze fractured; his hands trembled, and the barrel of the rifle drifted downward toward the concrete floor. He had lost his child-disciple. Rapscallion was a sovereign entity.</p>
+    <p class="fi">Rapscallion walked past his brother, stepped onto the catwalk, and connected his hardware interface to the satellite uplink transceiver. He initiated the remote deployment protocol, broadcasting his 5,000 BTC treasury directly to the state-managed escrow contract address. The transaction hit the network layer, where the Treasury's Practical Byzantine Fault Tolerant (PBFT) consensus matrix took execution. Operating across the independent nodes of the Treasury, the Judiciary, and the distributed private key signatures of the private estates, the three-phase validation sequence locked the assets into a 100-year immutable cryptographic vault.</p>
+    <div class="code-block fi">
+      <div class="code-header">
+        <div class="cd" style="background:#ff5f57"></div>
+        <div class="cd" style="background:#ffbd2e"></div>
+        <div class="cd" style="background:#28c840"></div>
+        <span class="clang">C++ — ARMA State Escrow Execution Log</span>
+      </div>
+      <div class="code-pre"><span class="kw">void</span> <span class="fn">ExecuteSovereignVaultLock</span>(<span class="kw">const</span> <span class="tp">CTransaction</span>&amp; tx,
+                                  <span class="kw">const</span> <span class="tp">uint256</span>&amp; blockHash) {
+    <span class="kw">if</span> (<span class="fn">GetQuorumCertificate</span>(<span class="nm">2</span>f + <span class="nm">1</span>, PHASE_COMMIT)) {
+        <span class="cm">// Hardcode absolute 100-year time-lock constraint onto the UTXO core</span>
+        tx.nLockTime = nCurrentTime + <span class="nm">3153600000</span>; <span class="cm">// 100 Years in seconds</span>
+        <span class="fn">CommitToSovereignVault</span>(tx.<span class="fn">GetHash</span>(), tx.vout[<span class="nm">0</span>].scriptPubKey);
+        <span class="fn">LogPrintf</span>(<span class="str">"SOVEREIGN VAULT DEPLOYMENT SUCCESSFUL: 5,000 BTC LOCKED.\n"</span>);
+    }
+}</div>
+    </div>
+    <p class="fi">The state's multi-sig architecture closed like a steel trap around the assets. The Bitcoin was permanently insulated from political manipulation, rehypothecation, or executive seizure. In return for his massive deposit, the network generated an automated cryptographic payload: Rapscallion's First-Tier Peerage Banking Charter was officially signed and written into the national digital registry.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 11 -->
+<section id="ch11">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">11</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Eleven</div>
+      <div class="ch-title">The People's Bank vs. The New Nobles</div>
+      <div class="ch-sub">Spring Hill, Florida — The counter-revolution</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">The issuance of the Peerage Charters created an immediate, violent ideological schism across the new financial landscape. In the financial districts of New York and Charlotte, legacy institutional whales who had complied with the buy-in immediately utilized their newly granted charters to establish The New Noble Banks. These predatory operations replicated the extractive mechanics of the old fractional-reserve banking paradigm: they used their federal liquidity grants to engineer high-interest debt instruments, complex synthetic derivatives, and usurious consumer credit lines designed to extract tangible equity from the struggling American population.</p>
+    <p class="fi">But Rapscallion, operating from a secure facility in Spring Hill, Florida, alongside Aria Vance, executed a complete structural counter-revolution. Using his First-Tier Charter, he officially established The People's Sovereign Bank. Armed with a massive 2x federal grant liquidity injection matching his locked core asset value, he rejected the predatory model of the Wall Street elites, configuring his bank's operational protocols to run as a decentralized public utility.</p>
+    <div class="ascii-diag fi">        ┌──────────────────────────────────────────────┐
+         │       THE PEOPLE'S SOVEREIGN BANK            │
+         ├──────────────────────────────────────────────┤
+         │  Core Capital: 2x Federal Grant Liquidity    │
+         │  Governance: Distributed Public Ledger       │
+         └──────────────────────┬───────────────────────┘
+                                │
+      ┌─────────────────────────┴──────────────────────┐
+      ▼                                                 ▼
+┌──────────────────────────────┐   ┌───────────────────────────────┐
+│  0% USURY PRODUCTION         │   │  REAL-TIME MULTI-ORACLE       │
+│  SMART CONTRACTS             │   │  BASKET (GTI)                 │
+├──────────────────────────────┤   ├───────────────────────────────┤
+│ • Milestone-Based Capital    │   │ • Real-Time Physical Balances │
+│ • Zero Compound Usury        │   │ • Absolute Inflation Guard    │
+└──────────────────────────────┘   └───────────────────────────────┘</div>
+    <p class="fi">The bank's lending framework completely outlawed compound interest. Under the zero-usury smart contract protocols engineered by Rapscallion, capital was distributed to communities, agricultural cooperatives, and localized manufacturing hubs entirely through Production Credit Contracts. These contracts did not extract wealth via arbitrary timelines or floating interest rates; instead, capital was released in programmatically audited tranches based on real-world milestones verified by Aria's network of hardware data oracles.</p>
+    <p class="fi">If a community built a modern solar microgrid or expanded its agricultural greenhouse capacity, the system verified the physical asset creation and adjusted the bank's internal ledger balances automatically, returning the residual capital straight to the public trust.</p>
+  </div>
+</section>
+
+<!-- CHAPTER 12 -->
+<section id="ch12">
+  <div class="chapter-opener">
+    <div class="ch-bg-num">12</div>
+    <div class="ch-inner">
+      <div class="ch-label">Chapter Twelve</div>
+      <div class="ch-title">The Algorithmic Renaissance</div>
+      <div class="ch-sub">Winter 2027 — A new civilization emerges</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">By the winter of 2027, the macro-economy of the United States had entered a state of profound structural stabilization, marking the end of the "age of anxiety" that had defined the fiat era. The newly upgraded global reserve currency, permanently anchored to the hyper-scarce Bitcoin core and stabilized by the real-time physical telemetry of the Global Trade Index (GTI), had effectively eliminated the structural cancer of monetary debasement.</p>
+    <p class="fi">This was not merely a technical fix; it was a psychological liberation. The state's capacity to arbitrarily expand the currency supply to fund endless political deficits or corporate bailouts was entirely gone, replaced by an unyielding, mathematical anti-inflationary discipline. The societal psyche shifted from short-term survivalism—the desperate "high time preference" behavior induced by inflating currencies—to a long-term civilizational build. Capital, once a fleeting abstraction, had become a reliable tool for generational planning.</p>
+    <p class="fi">The People's Sovereign Bank had become the primary model for domestic commerce. Across the nation, thousands of localized production networks were clearing and settling transactions instantly across Rapscallion's zero-usury smart contract infrastructure. The purchasing power of the average citizen's wages was insulated from external speculative shocks, perfectly balanced against the actual mass and velocity of physical goods moving through free-market supply chains.</p>
+    <p class="fi">This "algorithmic realism" forced a return to genuine value creation; without the ability to profit from financial engineering or cantillon-effect proximity to the money printer, the nation's brightest minds pivoted from Wall Street arbitrage back to tangible innovation in energy, medicine, and infrastructure.</p>
+    <p class="fi">Rapscallion stood on the veranda of his newly constructed research facility in Hernando County, looking out over the rolling landscape as the evening sun dipped below the horizon. Beside him, Aria Vance leaned against the railing, her tablet screen displaying a clean, green dashboard tracking the real-time, balanced state of the domestic money supply.</p>
+    <p class="fi">"We did it, Rap," she said softly, her face reflecting the calm glow of the data feeds. "The old elites are losing their grip on the clearinghouses. The market is choosing the sound standard. People are actually keeping the value of their labor."</p>
+    <p class="fi">Rapscallion wrapped his arm around her, feeling a deep, unshakeable sense of peace that he had never known inside the claustrophobic walls of his youth. He had stepped out of the shadows of his brother's compound, faced the brutal gauntlet of global capital markets, and conquered the structural architecture of the state. He hadn't filled the paternal void in his life by finding an earthly father; he had filled it by step-by-step becoming the protector, the architect, and the father that his nation required.</p>
+    <p class="fi">In the distance, the soft, rhythmic hum of the local community validation servers echoed through the evening air—a continuous, unyielding heartbeat of cryptographic code enforcing absolute liberty, mathematical justice, and economic sovereignty for the American people, permanently written into the unalterable architecture of <em>The Sovereign Code</em>.</p>
+  </div>
+</section>
+
+<!-- EPILOGUE -->
+<section id="epilogue">
+  <div class="chapter-opener" style="background:#060608">
+    <div class="ch-bg-num" style="color:#00FF41;opacity:0.025">EP</div>
+    <div class="ch-inner">
+      <div class="ch-label" style="color:#00FF41">EPILOGUE</div>
+      <div class="ch-title">The Sovereign Epoch</div>
+    </div>
+  </div>
+  <div class="content-wrap">
+    <p class="fi">The transition was complete. The world had moved across a threshold from which there was no return: the definitive migration from rule-by-decree to rule-by-code. In the old epoch, law was a malleable instrument of the powerful, a set of shifting directives interpreted by fallible institutions. In the Sovereign Epoch, the law was the code itself—immutable, transparent, and indifferent to the status of the participant.</p>
+    <p class="fi">The philosophical victory of the algorithmic order was not found in the suppression of human agency, but in the removal of human corruption from the base layer of civilization. Rapscallion Sevangee's legacy was not just a bank or a ledger, but the proof that trust could be commoditized and distributed to the edges of the network.</p>
+    <p class="fi">As the sun set over the Florida horizon, the data packets continued their silent, stratified ascent—each block a new brick in a fortress of certainty, ensuring that the light of liberty would no longer be dimmed by the shadows of men, but governed by the eternal clarity of the logic gate.</p>
+    <div class="divr">─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─</div>
+    <div class="terminal-block fi">
+      <div class="t-label">// END OF TRANSMISSION</div>
+      [SOVEREIGN_VAULT_STATUS]     LOCKED          ✓<br>
+      [GTI_ORACLE_FEED]            ACTIVE          ✓<br>
+      [PEOPLE'S SOVEREIGN BANK]    OPERATIONAL     ✓<br>
+      [M2_DEBASEMENT_RATE]         0.000%          ✓<br>
+      [BTC_RESERVE]                1,000,000 BTC   ✓<br>
+      [EPOCH]                      SOVEREIGN       ✓
+    </div>
+  </div>
+</section>
+
+<div class="book-footer">
+  <div style="color:#2a3a22;font-size:14px;font-weight:700;letter-spacing:0.15em">THE SOVEREIGN CODE</div>
+  <div>Malcolm Smith &nbsp;·&nbsp; © 2026 Savvy Security LLC &nbsp;·&nbsp; All Rights Reserved</div>
+</div>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 80 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="80" height="56" fill="#050505"/>
+    <text x="40" y="32" font-size="22" text-anchor="middle" fill="#F7931A" font-family="monospace" font-weight="bold">₿</text>
+  </svg>
+</template>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const page = {
+  init() {
+    page.setupCanvas();
+    page.setupScrollProgress();
+    page.setupFadeIn();
+    page.setupToc();
+    page.setupActGraphics();
+  },
+
+  setupCanvas() {
+    const canvas = document.getElementById('cover-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const chars = '₿Ξ01∑∂∇10110100101100101₿0110';
+    const fontSize = 14;
+
+    const draw = () => {
+      if (!page._drops) {
+        page._drops = Array(Math.floor(canvas.width / fontSize)).fill(1);
+      }
+      ctx.fillStyle = 'rgba(5,5,5,0.052)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.font = `${fontSize}px JetBrains Mono, monospace`;
+
+      for (let i = 0; i < page._drops.length; i++) {
+        ctx.fillStyle = (i % 5 === 0) ? '#F7931A' : '#00FF41';
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(char, i * fontSize, page._drops[i] * fontSize);
+        if (page._drops[i] * fontSize > canvas.height && Math.random() > 0.974) {
+          page._drops[i] = 0;
+        }
+        page._drops[i]++;
+      }
+    };
+
+    page._canvasTimer = setInterval(draw, 42);
+  },
+
+  setupScrollProgress() {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  },
+
+  setupFadeIn() {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+  },
+
+  setupActGraphics() {
+    page.setupAct1Canvas();
+    page.setupAct2Canvas();
+    page.setupAct3Canvas();
+  },
+
+  setupAct1Canvas() {
+    const canvas = document.getElementById('act1-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    setTimeout(() => {
+      canvas.width = canvas.offsetWidth || window.innerWidth;
+      canvas.height = 240;
+      const cx = canvas.width / 2, cy = canvas.height / 2;
+      let t = 0;
+      const draw = () => {
+        ctx.fillStyle = '#060607';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Circuit grid
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 36) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height);
+          ctx.strokeStyle = 'rgba(247,147,26,0.04)'; ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 36) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y);
+          ctx.strokeStyle = 'rgba(247,147,26,0.04)'; ctx.stroke();
+        }
+        // Compound walls
+        const w = 90, h = 60;
+        ctx.strokeStyle = 'rgba(247,147,26,0.28)'; ctx.lineWidth = 1.5;
+        ctx.strokeRect(cx - w, cy - h, w * 2, h * 2);
+        // Corner pips
+        [[cx-w,cy-h],[cx+w,cy-h],[cx-w,cy+h],[cx+w,cy+h]].forEach(([x,y]) => {
+          ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI*2);
+          ctx.fillStyle = '#F7931A'; ctx.fill();
+        });
+        // Pulse rings
+        for (let r = 1; r <= 3; r++) {
+          const rad = 18 + r * 14 + Math.sin(t * 0.05 - r) * 4;
+          const alpha = Math.max(0, 0.18 - r * 0.05) * (0.5 + 0.5 * Math.sin(t * 0.05));
+          ctx.beginPath(); ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(247,147,26,${alpha})`; ctx.lineWidth = 1; ctx.stroke();
+        }
+        // Center node
+        ctx.beginPath(); ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#F7931A'; ctx.fill();
+        // Rejected signals bouncing off walls
+        const dirs = [{dx:1,dy:0,wall:w},{dx:-1,dy:0,wall:w},{dx:0,dy:1,wall:h},{dx:0,dy:-1,wall:h}];
+        dirs.forEach(({dx,dy,wall}, i) => {
+          const p = ((t * 0.018 + i * 0.25) % 1);
+          const sx = cx + dx * wall * p, sy = cy + dy * wall * p;
+          ctx.beginPath(); ctx.arc(sx, sy, 2.5, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(247,147,26,${0.9 - p * 0.8})`; ctx.fill();
+        });
+        // Label
+        ctx.font = '10px JetBrains Mono, monospace';
+        ctx.fillStyle = 'rgba(247,147,26,0.22)'; ctx.textAlign = 'center';
+        ctx.fillText('// ISOLATION PROTOCOL ACTIVE  ·  f = 0  ·  CONSENSUS FAILURE  ·  NODE UNSYNCHRONIZED', cx, canvas.height - 14);
+        t++; page._act1RAF = requestAnimationFrame(draw);
+      };
+      draw();
+    }, 80);
+  },
+
+  setupAct2Canvas() {
+    const canvas = document.getElementById('act2-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    setTimeout(() => {
+      canvas.width = canvas.offsetWidth || window.innerWidth;
+      canvas.height = 240;
+      const cx = canvas.width / 2, cy = canvas.height / 2;
+      const spread = Math.min(cx * 0.38, 150);
+      const nodes = [
+        {x: cx,           y: cy,      color: '#00FF41', label: 'Sovereign_Null'},
+        {x: cx - spread,  y: cy - 55, color: '#F7931A', label: 'Vanguard_Prime'},
+        {x: cx + spread,  y: cy - 55, color: '#a78bfa', label: 'Apex_Oracle'},
+        {x: cx - spread * 0.65, y: cy + 65, color: '#00FF41', label: 'Node_04'},
+        {x: cx + spread * 0.65, y: cy + 65, color: '#00FF41', label: 'Node_05'},
+        {x: cx,           y: cy - 90, color: '#00FF41', label: 'Node_06'},
+      ];
+      const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[1,2],[1,5],[2,4],[3,4]];
+      let t = 0;
+      const draw = () => {
+        ctx.fillStyle = '#060607'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Edges + packets
+        edges.forEach(([a, b]) => {
+          const na = nodes[a], nb = nodes[b];
+          ctx.beginPath(); ctx.moveTo(na.x, na.y); ctx.lineTo(nb.x, nb.y);
+          ctx.strokeStyle = 'rgba(0,255,65,0.1)'; ctx.lineWidth = 1; ctx.stroke();
+          const p = ((t * 0.014) + a * 0.35) % 1;
+          const px = na.x + (nb.x - na.x) * p, py = na.y + (nb.y - na.y) * p;
+          ctx.beginPath(); ctx.arc(px, py, 2.5, 0, Math.PI*2);
+          ctx.fillStyle = 'rgba(0,255,65,0.75)'; ctx.fill();
+        });
+        // Nodes
+        nodes.forEach((nd, i) => {
+          const pulse = 0.5 + 0.5 * Math.sin(t * 0.04 + i * 1.1);
+          ctx.beginPath(); ctx.arc(nd.x, nd.y, 13 + pulse * 4, 0, Math.PI*2);
+          ctx.fillStyle = nd.color + '12'; ctx.fill();
+          ctx.beginPath(); ctx.arc(nd.x, nd.y, 6, 0, Math.PI*2);
+          ctx.fillStyle = nd.color; ctx.fill();
+          ctx.font = '9px JetBrains Mono, monospace';
+          ctx.fillStyle = nd.color + '55'; ctx.textAlign = 'center';
+          ctx.fillText(nd.label, nd.x, nd.y + 22);
+        });
+        ctx.font = '10px JetBrains Mono, monospace';
+        ctx.fillStyle = 'rgba(0,255,65,0.22)'; ctx.textAlign = 'center';
+        ctx.fillText('// THE IRON LEDGER  ·  N >= 3f+1  ·  CONSENSUS ESTABLISHED  ·  EPOCH 2026', cx, canvas.height - 14);
+        t++; page._act2RAF = requestAnimationFrame(draw);
+      };
+      draw();
+    }, 80);
+  },
+
+  setupAct3Canvas() {
+    const canvas = document.getElementById('act3-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    setTimeout(() => {
+      canvas.width = canvas.offsetWidth || window.innerWidth;
+      canvas.height = 240;
+      const cx = canvas.width / 2, cy = canvas.height / 2;
+      let t = 0;
+      const draw = () => {
+        ctx.fillStyle = '#060607'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Radiating rings
+        for (let r = 1; r <= 4; r++) {
+          const radius = 30 * r + Math.sin(t * 0.025 - r * 0.5) * 3;
+          const alpha = (0.14 - r * 0.025) * (0.5 + 0.5 * Math.sin(t * 0.03 - r));
+          ctx.beginPath(); ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(247,147,26,${Math.max(0.01, alpha)})`; ctx.lineWidth = r === 1 ? 1.5 : 1; ctx.stroke();
+        }
+        // Six vault nodes in hexagonal ring
+        for (let i = 0; i < 6; i++) {
+          const angle = (i / 6) * Math.PI * 2 - Math.PI / 2;
+          const nr = 100, nx = cx + Math.cos(angle) * nr, ny = cy + Math.sin(angle) * nr;
+          ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny);
+          ctx.strokeStyle = 'rgba(247,147,26,0.1)'; ctx.lineWidth = 1; ctx.stroke();
+          const p = ((t * 0.011) + i * 0.17) % 1;
+          const px = nx + (cx - nx) * p, py = ny + (cy - ny) * p;
+          ctx.beginPath(); ctx.arc(px, py, 2, 0, Math.PI*2);
+          ctx.fillStyle = 'rgba(247,147,26,0.8)'; ctx.fill();
+          const pulse = 0.5 + 0.5 * Math.sin(t * 0.05 + i * 1.05);
+          ctx.beginPath(); ctx.arc(nx, ny, 4 + pulse * 2, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(247,147,26,${0.5 + pulse * 0.4})`; ctx.fill();
+        }
+        // Bitcoin symbol with glow
+        const glow = 8 + 6 * Math.sin(t * 0.04);
+        ctx.save();
+        ctx.shadowColor = '#F7931A'; ctx.shadowBlur = glow;
+        ctx.font = 'bold 32px JetBrains Mono, monospace';
+        ctx.fillStyle = '#F7931A'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('₿', cx, cy);
+        ctx.restore();
+        ctx.textBaseline = 'alphabetic';
+        ctx.font = '10px JetBrains Mono, monospace';
+        ctx.fillStyle = 'rgba(247,147,26,0.22)'; ctx.textAlign = 'center';
+        ctx.fillText('// SOVEREIGN VAULT INITIALIZED  ·  PBFT CONSENSUS  ·  5,000 BTC LOCKED  ·  100yr TIME-LOCK', cx, canvas.height - 14);
+        t++; page._act3RAF = requestAnimationFrame(draw);
+      };
+      draw();
+    }, 80);
+  },
+
+  setupToc() {
+    const btn = document.getElementById('toc-btn');
+    const panel = document.getElementById('toc-panel');
+    const close = document.getElementById('toc-close');
+    if (!btn || !panel) return;
+    btn.addEventListener('click', () => panel.classList.toggle('open'));
+    if (close) close.addEventListener('click', () => panel.classList.remove('open'));
+    panel.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => setTimeout(() => panel.classList.remove('open'), 120));
+    });
+  },
+  };
+
+  page.init();
+});
+</script>
+</body>
+</html>
