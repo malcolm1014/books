@@ -1,0 +1,38 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="80%" cy="30%" r="55%">
+      <stop offset="0%" stop-color="#4cff6b" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#4cff6b" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#000"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#060a07"/>
+  <circle cx="960" cy="200" r="360" fill="url(#glow)"/>
+
+  <!-- floppy disk, right side -->
+  <g transform="translate(880,330)">
+    <rect x="0" y="0" width="220" height="220" rx="8" fill="#1a1f1c" stroke="#4cff6b" stroke-width="3"/>
+    <rect x="18" y="0" width="130" height="60" fill="#0b140d" stroke="#4cff6b" stroke-width="2"/>
+    <rect x="40" y="140" width="140" height="60" rx="4" fill="#0b140d" stroke="#4cff6b" stroke-width="2"/>
+    <rect x="55" y="155" width="110" height="12" fill="#4cff6b" opacity="0.6"/>
+    <circle cx="35" cy="18" r="5" fill="#ff6bcb"/>
+  </g>
+
+  <!-- heart made of two nodes + connecting line, small motif -->
+  <g stroke="#ff6bcb" stroke-width="2" fill="none" opacity="0.6">
+    <line x1="760" y1="480" x2="840" y2="480"/>
+    <circle cx="760" cy="480" r="6" fill="#ff6bcb"/>
+    <circle cx="840" cy="480" r="6" fill="#ff6bcb"/>
+  </g>
+
+  <rect width="1200" height="630" fill="url(#scan)" opacity="0.35"/>
+
+  <text x="80" y="130" font-family="'Courier New', monospace" font-size="19" fill="#4cff6b" letter-spacing="2" font-weight="700">SAVVY SECURITY LLC PRESENTS A FLOPPY-DISK ROMANCE</text>
+  <text x="78" y="205" font-family="Georgia, 'Times New Roman', serif" font-size="52" fill="#dfffe4" font-weight="700">DISTRIBUTED</text>
+  <text x="78" y="265" font-family="Georgia, 'Times New Roman', serif" font-size="52" fill="#dfffe4" font-weight="700">MATRIARCHY</text>
+  <text x="80" y="310" font-family="'Courier New', monospace" font-size="24" fill="#ff6bcb" font-weight="700" letter-spacing="1">THE LOCAL LOOP</text>
+  <text x="80" y="355" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#8fffa8">Two hackers, one modem, and a lifetime of encrypted devotion.</text>
+  <text x="80" y="560" font-family="'Courier New', monospace" font-size="17" fill="#4cff6b" opacity="0.8">MALCOLM R. SMITH · 16 CHAPTERS · 1984&#8211;2026</text>
+</svg>
